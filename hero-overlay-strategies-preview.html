@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero Overlay Strategies — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Open Sans', sans-serif;
+    background: #E8F2F8;
+    color: #0C4A6E;
+    padding: 40px 24px 80px;
+  }
+
+  /* ── HEADER ── */
+  .head { max-width: 1180px; margin: 0 auto 36px; }
+  .head .tag { font-family: 'Poppins', sans-serif; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #0EA5E9; margin-bottom: 8px; font-weight: 600; }
+  .head h1 { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 700; color: #0C4A6E; letter-spacing: -0.01em; }
+  .head p { color: #475569; margin-top: 8px; font-size: 14px; line-height: 1.7; max-width: 760px; }
+
+  /* ── GRID ── */
+  .grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1024px) { .grid { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 10px 25px rgba(12,74,110,.12); border: 1px solid #BAE6FD; }
+  .card-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid #E8F2F8; flex-wrap: wrap; }
+  .card-head .tag { font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: 4px 9px; border-radius: 100px; }
+  .card-head h2 { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; color: #0C4A6E; }
+  .card-head .desc { margin-left: auto; font-size: 11.5px; color: #64748B; }
+
+  /* ── HERO STAGE (shared) ── */
+  .hero {
+    position: relative; height: 620px; overflow: hidden;
+  }
+  @media (max-width: 640px) { .hero { height: 500px; } }
+
+  .slide { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .overlay { position: absolute; inset: 0; z-index: 1; }
+
+  .content {
+    position: relative; z-index: 2; height: 100%;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 48px 40px; max-width: 480px;
+  }
+
+  /* ── EYEBROW ── */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Open Sans', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 6px 13px; border-radius: 100px; margin-bottom: 18px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── HEADING ── */
+  .heading {
+    font-family: 'Poppins', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700; line-height: 1.15; margin-bottom: 16px;
+    text-shadow: 0 2px 12px rgba(0,0,0,.25);
+  }
+
+  /* ── CAPTION ── */
+  .caption {
+    font-family: 'Open Sans', sans-serif; font-size: clamp(.9rem, 1.8vw, 1rem);
+    font-weight: 400; line-height: 1.65; margin-bottom: 24px;
+  }
+
+  /* ── CTA BUTTONS ── */
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .btn-p {
+    font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 13px 24px; border-radius: 8px; border: none; cursor: pointer;
+  }
+  .btn-g {
+    font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 13px 24px; border-radius: 8px; border: 2px solid rgba(255,255,255,.6);
+    background: transparent; cursor: pointer; backdrop-filter: blur(4px);
+  }
+
+  /* ── BADGES ── */
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Open Sans', sans-serif; font-size: 11px; font-weight: 500;
+    padding: 7px 14px; border-radius: 100px; backdrop-filter: blur(6px);
+  }
+
+  /* ══════════ STRATEGY 1: CURRENT HEAVY BLUE ══════════ */
+  .s1 .overlay {
+    background: linear-gradient(110deg,
+      rgba(12, 74, 110, 0.72) 0%,
+      rgba(12, 74, 110, 0.45) 55%,
+      rgba(12, 74, 110, 0.20) 100%
+    );
+  }
+  .s1 .eyebrow {
+    color: #38BDF8;
+    background: rgba(56,189,248,.15);
+    border: 1px solid rgba(56,189,248,.3);
+  }
+  .s1 .heading { color: #fff; }
+  .s1 .heading em { font-style: normal; color: #38BDF8; }
+  .s1 .caption { color: rgba(255,255,255,.88); }
+  .s1 .btn-p { background: #0EA5E9; color: #fff; box-shadow: 0 4px 16px rgba(14,165,233,.45); }
+  .s1 .btn-g { color: #fff; }
+  .s1 .badge {
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.22);
+    color: rgba(255,255,255,.95);
+  }
+  .s1 .eyebrow svg { color: #38BDF8; }
+  .s1 .badge svg { color: rgba(255,255,255,.95); }
+
+  /* ══════════ STRATEGY 2: NEUTRAL SCrim + FADE ══════════ */
+  .s2 .overlay {
+    background:
+      linear-gradient(90deg,
+        rgba(10, 15, 20, 0.40) 0%,
+        rgba(10, 15, 20, 0.12) 40%,
+        rgba(10, 15, 20, 0) 68%
+      ),
+      linear-gradient(to top,
+        rgba(10, 15, 20, 0.55) 0%,
+        rgba(10, 15, 20, 0) 32%
+      );
+  }
+  .s2 .eyebrow {
+    color: #fff;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    backdrop-filter: blur(6px);
+  }
+  .s2 .heading { color: #fff; }
+  .s2 .heading em { font-style: normal; color: rgba(255,255,255,.98); }
+  .s2 .caption { color: rgba(255,255,255,.82); font-weight: 500; }
+  .s2 .btn-p { background: #0EA5E9; color: #fff; box-shadow: 0 4px 20px rgba(14,165,233,.35); }
+  .s2 .btn-g { color: #fff; }
+  .s2 .badge {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    color: rgba(255,255,255,.85);
+  }
+  .s2 .eyebrow svg { color: rgba(255,255,255,.95); }
+  .s2 .badge svg { color: rgba(255,255,255,.85); }
+
+  /* ══════════ STRATEGY 3: FROSTED GLASS PANEL ══════════ */
+  .s3 .overlay {
+    background:
+      linear-gradient(90deg,
+        rgba(10, 15, 20, 0.18) 0%,
+        rgba(10, 15, 20, 0.06) 40%,
+        rgba(10, 15, 20, 0) 68%
+      ),
+      linear-gradient(to top,
+        rgba(10, 15, 20, 0.45) 0%,
+        rgba(10, 15, 20, 0) 28%
+      );
+  }
+  .s3 .eyebrow {
+    color: rgba(255,255,255,.92);
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.22);
+  }
+  .s3 .heading { color: #fff; }
+  .s3 .heading em { font-style: normal; color: rgba(255,255,255,.98); }
+  .s3 .caption { color: rgba(255,255,255,.82); font-weight: 500; }
+  .s3 .btn-p { background: #0EA5E9; color: #fff; box-shadow: 0 4px 20px rgba(14,165,233,.35); }
+  .s3 .btn-g { color: #fff; }
+  .s3 .badge {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.18);
+    color: rgba(255,255,255,.85);
+  }
+  .s3 .eyebrow svg { color: rgba(255,255,255,.92); }
+  .s3 .badge svg { color: rgba(255,255,255,.85); }
+  .s3 .glass-panel {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  }
+
+  /* ── FOOTNOTE ── */
+  .foot-note { max-width: 1180px; margin: 28px auto 0; font-size: 12.5px; color: #64748B; line-height: 1.8; }
+  .foot-note b { color: #0C4A6E; }
+  .foot-note code { background: #fff; border: 1px solid #BAE6FD; border-radius: 4px; padding: 1px 5px; color: #0EA5E9; font-size: 11px; }
+</style>
+</head>
+<body>
+
+  <div class="head">
+    <div class="tag">California Dental · Hero Overlay Strategies</div>
+    <h1>Three overlay approaches — side by side</h1>
+    <p>All three use the same hero photo, text, buttons, and badges. Only the <b>overlay + color treatment</b> differs. Compare readability, photo visibility, and overall feel. <b>Recommended: Strategy #2</b> (Neutral Scrim + Fade).</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- ══════════ 1. CURRENT HEAVY BLUE ══════════ -->
+    <div class="card">
+      <div class="card-head">
+        <span class="tag" style="color:#DC2626;background:rgba(220,38,38,.08)">CURRENT</span>
+        <h2>Heavy Blue Overlay</h2>
+        <span class="desc">washes out photos</span>
+      </div>
+      <div class="hero s1">
+        <div class="slide" style="background-image:url('assets/Dental images/1st p.jfif')"></div>
+        <div class="overlay"></div>
+        <div class="content">
+          <span class="eyebrow">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Family &amp; Cosmetic Dentistry · San Fernando, CA
+          </span>
+          <h1 class="heading">Healthy Mouth,<br><em>Happy Life.</em></h1>
+          <p class="caption">San Fernando's trusted dental family — general &amp; cosmetic dentistry, teeth whitening, implants, and more.</p>
+          <div class="cta-row">
+            <span class="btn-p">Book an Appointment</span>
+            <span class="btn-g">(818) 361-3889</span>
+          </div>
+          <div class="badges">
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Accepting New Patients
+            </span>
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Most Insurance Accepted
+            </span>
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Mon–Fri 9am–5pm
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ 2. NEUTRAL SCRIM + FADE ══════════ -->
+    <div class="card">
+      <div class="card-head">
+        <span class="tag" style="color:#16A34A;background:rgba(22,163,74,.08)">RECOMMENDED</span>
+        <h2>Neutral Scrim + Fade</h2>
+        <span class="desc">clean + readable</span>
+      </div>
+      <div class="hero s2">
+        <div class="slide" style="background-image:url('assets/Dental images/1st p.jfif')"></div>
+        <div class="overlay"></div>
+        <div class="content">
+          <span class="eyebrow">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Family &amp; Cosmetic Dentistry · San Fernando, CA
+          </span>
+          <h1 class="heading">Healthy Mouth,<br><em>Happy Life.</em></h1>
+          <p class="caption">San Fernando's trusted dental family — general &amp; cosmetic dentistry, teeth whitening, implants, and more.</p>
+          <div class="cta-row">
+            <span class="btn-p">Book an Appointment</span>
+            <span class="btn-g">(818) 361-3889</span>
+          </div>
+          <div class="badges">
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Accepting New Patients
+            </span>
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Most Insurance Accepted
+            </span>
+            <span class="badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Mon–Fri 9am–5pm
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ 3. FROSTED GLASS PANEL ══════════ -->
+    <div class="card">
+      <div class="card-head">
+        <span class="tag" style="color:#0EA5E9;background:rgba(14,165,233,.08)">OPTIONAL</span>
+        <h2>Frosted Glass Panel</h2>
+        <span class="desc">modern glass card</span>
+      </div>
+      <div class="hero s3">
+        <div class="slide" style="background-image:url('assets/Dental images/1st p.jfif')"></div>
+        <div class="overlay"></div>
+        <div class="content">
+          <div class="glass-panel">
+            <span class="eyebrow">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Family &amp; Cosmetic Dentistry · San Fernando, CA
+            </span>
+            <h1 class="heading">Healthy Mouth,<br><em>Happy Life.</em></h1>
+            <p class="caption">San Fernando's trusted dental family — general &amp; cosmetic dentistry, teeth whitening, implants, and more.</p>
+            <div class="cta-row">
+              <span class="btn-p">Book an Appointment</span>
+              <span class="btn-g">(818) 361-3889</span>
+            </div>
+            <div class="badges">
+              <span class="badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Accepting New Patients
+              </span>
+              <span class="badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Most Insurance Accepted
+              </span>
+              <span class="badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Mon–Fri 9am–5pm
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="foot-note">
+    <b>How to compare:</b> All three use the same dental photo (<code>1st p.jfif</code>), same text, same buttons. The only difference is the overlay + accent color treatment.<br><br>
+    <b>CURRENT</b> — Heavy blue tint at 0.72 opacity. Washes out the photo, dominates the hero.<br>
+    <b>RECOMMENDED (#2)</b> — Neutral dark scrim on text side + bottom fade. No blue tint. Photo shows through on right. Text stays readable. Smooth section transition.<br>
+    <b>OPTIONAL (#3)</b> — Minimal overlay + frosted glass card behind text. Most modern look. Guarantees readability on any photo.<br><br>
+    <b>Changes across all strategies:</b> Eyebrow goes from blue pill → white pill. Heading accent goes from blue → white. Caption stays white. CTA button stays blue (conversion driver). Badges go from blue-tinted → neutral white.
+  </div>
+
+</body>
+</html>
