@@ -552,11 +552,522 @@
       white-space: nowrap;
     }
 
+    /* ─── SECTION COMMON ────────────────────────────────────────── */
+    .section {
+      padding: var(--space-3xl) var(--space-xl);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--color-foreground);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--space-sm);
+    }
+    .section__subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--color-muted-fg);
+      font-weight: 500;
+      margin-bottom: var(--space-2xl);
+    }
+
+    /* ─── PROBLEM STATEMENT SECTION ────────────────────────────── */
+    .problem-section {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .problem-container {
+      display: flex;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    .problem__content {
+      flex: 1.2;
+    }
+    .problem__card-column {
+      flex: 0.8;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .problem__card {
+      background: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .problem__card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20px;
+      bottom: 20px;
+      width: 4px;
+      background: var(--color-primary);
+      border-radius: 0 4px 4px 0;
+    }
+    .problem__card-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-xs);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .problem__card-desc {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-muted-fg);
+      line-height: 1.6;
+    }
+    .problem__text {
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: var(--color-muted-fg);
+      margin-bottom: var(--space-xl);
+    }
+    .problem__text p {
+      margin-bottom: var(--space-md);
+    }
+    .problem__text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ─── SERVICES GRID SECTION ─────────────────────────────────── */
+    .services-section {
+      background: var(--color-background);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-xl);
+    }
+    .service-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-md);
+      transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+    }
+    .service-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+      border-color: var(--color-secondary);
+    }
+    .service-card:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 4px;
+    }
+    .service-card__icon-container {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      background: rgba(14, 165, 233, 0.08);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-lg);
+      transition: background 250ms ease, color 250ms ease;
+    }
+    .service-card:hover .service-card__icon-container {
+      background: var(--color-primary);
+      color: #FFFFFF;
+    }
+    .service-card__icon {
+      width: 26px;
+      height: 26px;
+    }
+    .service-card__title {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-sm);
+    }
+    .service-card__desc {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-muted-fg);
+      line-height: 1.6;
+      margin-bottom: var(--space-xl);
+      flex-grow: 1;
+    }
+    .service-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--color-primary);
+      transition: color var(--transition);
+      margin-top: auto;
+    }
+    .service-card__cta svg {
+      transition: transform var(--transition);
+    }
+    .service-card:hover .service-card__cta {
+      color: var(--color-foreground);
+    }
+    /* ─── TESTIMONIALS CAROUSEL ──────────────────────────────────── */
+    .testimonials-section {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--color-border);
+      position: relative;
+    }
+    .testimonials__wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+    .testimonial-card {
+      display: none;
+      background: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: var(--space-2xl) var(--space-xl);
+      box-shadow: var(--shadow-md);
+      transition: opacity 500ms ease;
+    }
+    .testimonial-card.active {
+      display: block;
+    }
+    .testimonial__stars {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      color: #F59E0B;
+      margin-bottom: var(--space-md);
+    }
+    .testimonial__quote {
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-xl);
+      position: relative;
+    }
+    .testimonial__author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+    }
+    .testimonial__avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .testimonial__meta {
+      text-align: left;
+    }
+    .testimonial__name {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-foreground);
+    }
+    .testimonial__role {
+      font-size: 13px;
+      color: var(--color-muted-fg);
+    }
+    .testimonials__controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      margin-top: var(--space-2xl);
+    }
+    .testimonials__ctrl-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: var(--color-card);
+      color: var(--color-foreground);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .testimonials__ctrl-btn:hover {
+      background: var(--color-primary);
+      color: #FFFFFF;
+      border-color: var(--color-primary);
+    }
+    .testimonials__ctrl-btn:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+    }
+    .testimonials__dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .testimonials__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-border);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .testimonials__dot.active {
+      background: var(--color-primary);
+      width: 28px;
+      border-radius: 100px;
+    }
+
+    /* ─── CTA & EXCLUSIVE OFFER SECTION ──────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, #0C4A6E 0%, #075985 100%);
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-container {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xl);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .cta__text-col {
+      flex: 1;
+    }
+    .cta__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #38BDF8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: var(--space-md);
+    }
+    .cta__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: #FFFFFF;
+      margin-bottom: var(--space-md);
+    }
+    .cta__desc {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: var(--space-xl);
+    }
+    .cta__form-col {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: var(--space-2xl);
+      box-shadow: var(--shadow-xl);
+      color: var(--color-foreground);
+    }
+    .cta__form-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-xs);
+    }
+    .cta__form-subtitle {
+      font-size: 14px;
+      color: var(--color-muted-fg);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* ─── LOCATION, HOURS & NEWSLETTER SECTION ─────────────────────── */
+    .location-hours-section {
+      background: var(--color-background);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+    .location-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+    }
+    .location-card__title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-foreground);
+      margin-bottom: var(--space-xs);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .location-card__subtitle {
+      font-size: 13.5px;
+      color: var(--color-muted-fg);
+      margin-bottom: var(--space-lg);
+    }
+    .map-frame {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      height: 220px;
+      margin-top: auto;
+    }
+    .hours-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-muted);
+    }
+    .hours-day {
+      font-weight: 600;
+      color: var(--color-foreground);
+    }
+    .hours-time {
+      color: var(--color-muted-fg);
+    }
+    .hours-time.closed {
+      color: var(--color-destructive);
+      font-weight: 500;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    .site-footer {
+      background: #0F172A;
+      color: #94A3B8;
+      padding: var(--space-2xl) var(--space-xl) var(--space-xl);
+      font-size: 14px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid #1E293B;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .footer-brand img {
+      height: 40px;
+      width: auto;
+    }
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .footer-social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1E293B;
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .footer-social-link:hover {
+      background: var(--color-primary);
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+    .footer-social-link:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 3px;
+    }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-size: 13px;
+    }
+    .footer-links {
+      display: flex;
+      gap: var(--space-lg);
+    }
+    .footer-links a {
+      color: #94A3B8;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover {
+      color: #FFFFFF;
+    }
+
     /* ─── RESPONSIVE ─────────────────────────────────────────────── */
     @media (max-width: 1024px) {
       .navbar__nav { display: none; }
       .navbar__right .navbar__cta { display: none; }
       .navbar__hamburger { display: flex; }
+      .services__grid { grid-template-columns: repeat(2, 1fr); }
+      .location-grid { grid-template-columns: 1fr; }
+      .cta-container { flex-direction: column; text-align: center; }
     }
     @media (max-width: 768px) {
       .hero { height: calc(100svh - var(--nav-h)); min-height: 480px; max-height: 700px; }
@@ -566,6 +1077,11 @@
       .hero__caption { font-size: .95rem; }
       .hero__controls { bottom: 20px; }
       .navbar__inner { padding: 0 var(--space-md); }
+      .problem-container { flex-direction: column; gap: var(--space-xl); }
+      .section { padding: var(--space-2xl) var(--space-md); }
+    }
+    @media (max-width: 540px) {
+      .services__grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 375px) {
       .hero__cta-row { flex-direction: column; }
@@ -615,13 +1131,13 @@
 
       <!-- Desktop nav links -->
       <ul class="navbar__nav" role="list">
-        <li><a href="https://www.california-dental.net" class="active" aria-current="page">Home</a></li>
-        <li><a href="https://www.california-dental.net/ourteam">About Us</a></li>
-        <li><a href="https://www.california-dental.net/dental-services">Services</a></li>
-        <li><a href="https://www.california-dental.net/our-location">Office</a></li>
-        <li><a href="https://www.california-dental.net/contact">Contact Us</a></li>
-        <li><a href="https://www.california-dental.net/new-patients">New Patients</a></li>
-        <li><a href="https://www.california-dental.net/testimonials">Testimonials</a></li>
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="ourteam.html">About Us</a></li>
+        <li><a href="dental-services.html">Services</a></li>
+        <li><a href="our-location.html">Office</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="new-patients.html">New Patients</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
       </ul>
 
       <!-- Desktop right: phone + CTA -->
@@ -630,7 +1146,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.4 2 2 0 0 1 3.56 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           (818) 361-3889
         </a>
-        <a href="https://www.california-dental.net/appointment" class="navbar__cta">
+        <a href="appointment.html" class="navbar__cta">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Book Appointment
         </a>
@@ -646,14 +1162,14 @@
 
   <!-- Mobile drawer -->
   <div class="navbar__drawer" id="mobile-drawer" role="dialog" aria-label="Mobile navigation">
-    <a href="https://www.california-dental.net" aria-current="page">Home</a>
-    <a href="https://www.california-dental.net/ourteam">About Us</a>
-    <a href="https://www.california-dental.net/dental-services">Services</a>
-    <a href="https://www.california-dental.net/our-location">Office</a>
-    <a href="https://www.california-dental.net/contact">Contact Us</a>
-    <a href="https://www.california-dental.net/new-patients">New Patients</a>
-    <a href="https://www.california-dental.net/testimonials">Testimonials</a>
-    <a href="https://www.california-dental.net/appointment" class="navbar__cta" style="justify-content:center;margin-top:8px;">Book Appointment</a>
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="ourteam.html">About Us</a>
+    <a href="dental-services.html">Services</a>
+    <a href="our-location.html">Office</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="new-patients.html">New Patients</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="appointment.html" class="navbar__cta" style="justify-content:center;margin-top:8px;">Book Appointment</a>
     <a href="tel:(818) 361-3889" class="drawer-phone piwik_ignore">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.4 2 2 0 0 1 3.56 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       (818) 361-3889
@@ -767,9 +1283,408 @@
   </section>
   <!-- END HERO — remaining sections (Services, Testimonials, CTA, Footer) to follow -->
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       PROBLEM STATEMENT (WELCOME) SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="problem-section" id="welcome" aria-label="Welcome and Practice Overview">
+    <div class="section">
+      <div class="problem-container">
+        <div class="problem__content">
+          <span class="hero__eyebrow" style="color: var(--color-primary); background: rgba(14,165,233,.08); border-color: var(--color-border); margin-bottom: var(--space-md);" aria-hidden="true">
+            Welcome to California Dental
+          </span>
+          <h2 class="section__title">Your Dentist in San Fernando, CA</h2>
+          <div class="problem__text">
+            <p>
+              We understand that finding the right dentist for your family can feel overwhelming. Balancing busy schedules, navigating dental insurance, and managing dental anxiety are common challenges that shouldn't stand in the way of a healthy smile.
+            </p>
+            <p>
+              At California Dental, we are dedicated to changing that experience. Led by Dr. Arman Petrosyan, our team is committed to making high-quality, comprehensive dental care convenient, comfortable, and accessible for patients of all ages.
+            </p>
+          </div>
+          <a href="https://www.california-dental.net/ourteam" class="btn-primary" style="background: transparent; color: var(--color-primary); border: 2px solid var(--color-primary); box-shadow: none;">
+            Meet Dr. Petrosyan &amp; Team
+          </a>
+        </div>
+        <div class="problem__card-column">
+          <div class="problem__card">
+            <h3 class="problem__card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Convenient Scheduling
+            </h3>
+            <p class="problem__card-desc">
+              We know how hectic life can be. We offer flexible weekday hours and Saturday appointments (9:00 AM - 2:00 PM) to fit your schedule.
+            </p>
+          </div>
+          <div class="problem__card">
+            <h3 class="problem__card-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Most Insurance Accepted
+            </h3>
+            <p class="problem__card-desc">
+              We work with a wide range of dental insurance providers and help you maximize your benefits, ensuring transparent pricing and no surprises.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       JAVASCRIPT — Navbar scroll, mobile drawer, hero slider
+       SOLUTION OVERVIEW (SERVICES) SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="services-section" id="services" aria-label="Our Dental Services">
+    <div class="section">
+      <h2 class="section__title" style="text-align: center;">Our Featured Services</h2>
+      <p class="section__subtitle" style="text-align: center;">Comprehensive dental care designed to keep your family smiling</p>
+      
+      <div class="services__grid">
+        <!-- Card 1: General Dentistry -->
+        <a href="https://www.california-dental.net/dental-services" class="service-card" aria-label="Learn more about General Dentistry">
+          <div class="service-card__icon-container">
+            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="service-card__title">General Dentistry</h3>
+          <p class="service-card__desc">
+            From routine checkups and cleanings to preventative education, we help you preserve your natural teeth and maintain optimal oral hygiene.
+          </p>
+          <span class="service-card__cta">
+            Learn More
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+
+        <!-- Card 2: Teeth Whitening -->
+        <a href="https://www.california-dental.net/dental-services" class="service-card" aria-label="Learn more about Teeth Whitening">
+          <div class="service-card__icon-container">
+            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+              <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5.5z"/>
+              <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/>
+            </svg>
+          </div>
+          <h3 class="service-card__title">Teeth Whitening</h3>
+          <p class="service-card__desc">
+            Effectively restore brilliance to stained, dull, or discolored teeth with our professional, safe, and fast cosmetic whitening treatments.
+          </p>
+          <span class="service-card__cta">
+            Learn More
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+
+        <!-- Card 3: Dental Fillings -->
+        <a href="https://www.california-dental.net/dental-services" class="service-card" aria-label="Learn more about Dental Fillings">
+          <div class="service-card__icon-container">
+            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="16"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+          </div>
+          <h3 class="service-card__title">Fillings</h3>
+          <p class="service-card__desc">
+            Restore structural integrity and block decay with high-quality, tooth-colored dental composite fillings that blend seamlessly with your smile.
+          </p>
+          <span class="service-card__cta">
+            Learn More
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+
+        <!-- Card 4: Dental Implants -->
+        <a href="https://www.california-dental.net/dental-services" class="service-card" aria-label="Learn more about Dental Implants">
+          <div class="service-card__icon-container">
+            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7z"/>
+              <path d="M5 20h14"/>
+            </svg>
+          </div>
+          <h3 class="service-card__title">Dental Implants</h3>
+          <p class="service-card__desc">
+            A permanent, state-of-the-art alternative to traditional dentures. Replace missing teeth with secure implants that feel and look natural.
+          </p>
+          <span class="service-card__cta">
+            Learn More
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  <!-- ═══════════════════════════════════════════════════════════════
+       TESTIMONIALS CAROUSEL SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="testimonials-section" id="testimonials" aria-label="Patient Testimonials">
+    <div class="section">
+      <h2 class="section__title" style="text-align: center;">What Our Patients Say</h2>
+      <p class="section__subtitle" style="text-align: center;">Real experiences from smiles we've cared for in San Fernando</p>
+
+      <div class="testimonials__wrapper" id="testimonials-carousel">
+        <span class="sr-only" id="testimonial-announce" aria-live="polite" aria-atomic="true"></span>
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card active" role="tabpanel" aria-label="Testimonial 1 of 4">
+          <div class="testimonial__stars" aria-label="5 out of 5 stars rating">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote class="testimonial__quote">
+            Dr. Petrosyan provided me with excellent care when I needed it the most. He is so gentle, thorough, and takes the time to explain everything clearly.
+          </blockquote>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar" aria-hidden="true">JR</div>
+            <div class="testimonial__meta">
+              <div class="testimonial__name">Jennifer R.</div>
+              <div class="testimonial__role">San Fernando Resident · Patient since 2019</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card" role="tabpanel" aria-label="Testimonial 2 of 4">
+          <div class="testimonial__stars" aria-label="5 out of 5 stars rating">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote class="testimonial__quote">
+            Visiting California Dental gives my family and me more reasons to smile. The staff is so welcoming and wonderful with my children.
+          </blockquote>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar" aria-hidden="true">TJ</div>
+            <div class="testimonial__meta">
+              <div class="testimonial__name">The Johnson Family</div>
+              <div class="testimonial__role">Family Care Patients</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card" role="tabpanel" aria-label="Testimonial 3 of 4">
+          <div class="testimonial__stars" aria-label="5 out of 5 stars rating">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote class="testimonial__quote">
+            I was always hesitant about cosmetic dentistry, but my teeth whitening results exceeded all my expectations! Highly recommend Dr. Petrosyan.
+          </blockquote>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar" aria-hidden="true">MS</div>
+            <div class="testimonial__meta">
+              <div class="testimonial__name">Maria S.</div>
+              <div class="testimonial__role">Cosmetic Care Patient</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card" role="tabpanel" aria-label="Testimonial 4 of 4">
+          <div class="testimonial__stars" aria-label="5 out of 5 stars rating">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote class="testimonial__quote">
+            Getting dental implants here was smooth and painless. Dr. Petrosyan speaks Spanish fluently which helped my mother feel completely comfortable.
+          </blockquote>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar" aria-hidden="true">DM</div>
+            <div class="testimonial__meta">
+              <div class="testimonial__name">David M.</div>
+              <div class="testimonial__role">Implants Patient</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="testimonials__controls" role="group" aria-label="Testimonial controls">
+          <button class="testimonials__ctrl-btn" id="t-prev" aria-label="Previous testimonial" title="Previous testimonial">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          
+          <div class="testimonials__dots" role="tablist" aria-label="Testimonial navigation">
+            <button class="testimonials__dot active" role="tab" aria-selected="true"  aria-label="Testimonial 1" data-slide="0" tabindex="0"></button>
+            <button class="testimonials__dot"        role="tab" aria-selected="false" aria-label="Testimonial 2" data-slide="1" tabindex="-1"></button>
+            <button class="testimonials__dot"        role="tab" aria-selected="false" aria-label="Testimonial 3" data-slide="2" tabindex="-1"></button>
+            <button class="testimonials__dot"        role="tab" aria-selected="false" aria-label="Testimonial 4" data-slide="3" tabindex="-1"></button>
+          </div>
+
+          <button class="testimonials__ctrl-btn" id="t-next" aria-label="Next testimonial" title="Next testimonial">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+
+          <button class="testimonials__ctrl-btn" id="t-pause" aria-label="Pause testimonial slideshow" title="Pause slideshow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" id="t-pause-icon">
+              <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" id="t-play-icon" style="display:none">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CTA & EXCLUSIVE OFFER SECTION (SMB LEADS FORM PRESERVED)
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="cta-section" id="offer" aria-label="Exclusive Special Offer">
+    <div class="section">
+      <div class="cta-container">
+        <div class="cta__text-col">
+          <span class="cta__eyebrow" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Exclusive New Patient Offer
+          </span>
+          <h2 class="cta__title">Ready for a Healthier, Brighter Smile?</h2>
+          <p class="cta__desc">
+            Sign up today to receive special offers, new patient discounts, and priority scheduling for your family's next dental visit.
+          </p>
+          <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+            <a href="tel:(818) 361-3889" class="btn-primary" style="background: #38BDF8; color: #0F172A;">
+              Call (818) 361-3889
+            </a>
+            <a href="https://www.california-dental.net/appointment" class="btn-ghost">
+              Request Appointment Online
+            </a>
+          </div>
+        </div>
+
+        <div class="cta__form-col">
+          <h3 class="cta__form-title">Exclusive Offer Signup</h3>
+          <p class="cta__form-subtitle">Enter your details below to claim special promotions.</p>
+          
+          <!-- PRESERVED: Dynamic Exclusive Offer SMB Leads Form Script & Target Container -->
+          <script data-cfasync="false">
+          (function (s, o, h, g, r, a, m) {
+            a = s.createElement(o); m = s.getElementsByTagName(h)[0];
+            a.async = 1; a.src = g; m.appendChild(a);
+          })(document, 'script', 'head', "https://smbleads.ibsmb.com/v1/leads/create_form/XiukwB3B53wkd9IB0191RUkz");
+          </script>
+          <div class="leadForm_XiukwB3B53wkd9IB0191RUkz" data-control="form" data-template-id="custom-website-custom-template" data-mhorgid=""></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LOCATION, HOURS & NEWSLETTER SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="location-hours-section" id="location" aria-label="Office Location, Hours and Newsletter">
+    <div class="section">
+      <div class="location-grid">
+        
+        <!-- Column 1: Map & Location -->
+        <div class="location-card">
+          <h3 class="location-card__title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Our Location
+          </h3>
+          <p class="location-card__subtitle">1009 Glenoaks Blvd, San Fernando, CA 91340</p>
+          
+          <!-- PRESERVED: Google Maps iframe embed -->
+          <div class="map-frame">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d824.0828776774114!2d-118.4300225!3d34.2910951!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c291c8bfd76b0b%3A0x4c433f9871789709!2s1009+Glenoaks+Blvd%2C+San+Fernando%2C+CA+91340!5e0!3m2!1sen!2sus!4v1565294924444!5m2!1sen!2sus" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen="" title="California Dental Google Maps location"></iframe>
+          </div>
+        </div>
+
+        <!-- Column 2: Hours of Operation -->
+        <div class="location-card">
+          <h3 class="location-card__title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Hours of Operation
+          </h3>
+          <p class="location-card__subtitle">Flexible schedules to accommodate busy families</p>
+          
+          <div class="hours-list">
+            <div class="hours-row"><span class="hours-day">Monday</span><span class="hours-time">9:00 AM - 6:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Tuesday</span><span class="hours-time">9:00 AM - 7:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Wednesday</span><span class="hours-time">9:00 AM - 6:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Thursday</span><span class="hours-time">9:00 AM - 7:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Friday</span><span class="hours-time closed">Closed</span></div>
+            <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">9:00 AM - 2:00 PM</span></div>
+            <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time closed">Closed</span></div>
+          </div>
+        </div>
+
+        <!-- Column 3: Newsletter Signup (SMB LEADS FORM PRESERVED) -->
+        <div class="location-card">
+          <h3 class="location-card__title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-primary);" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Newsletter Signup
+          </h3>
+          <p class="location-card__subtitle">Subscribe to receive oral health tips and updates</p>
+          
+          <!-- PRESERVED: Dynamic Newsletter Signup SMB Leads Form Script & Target Container -->
+          <script data-cfasync="false">
+          (function (s, o, h, g, r, a, m) {
+            a = s.createElement(o); m = s.getElementsByTagName(h)[0];
+            a.async = 1; a.src = g; m.appendChild(a);
+          })(document, 'script', 'head', "https://smbleads.ibsmb.com/v1/leads/create_form/oRjpwZ4V-VG8kmw9dpuXISnG");
+          </script>
+          <div class="leadForm_oRjpwZ4V-VG8kmw9dpuXISnG" data-control="form" data-template-id="custom-website-custom-template" data-mhorgid=""></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FOOTER SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="https://www.california-dental.net" aria-label="California Dental Home">
+            <img src="https://cdcssl.ibsrv.net/ibimg/smb/396x150_80/webmgr/0v/0/l/cali-logo1.jpg.webp?b8991b224cc1a1da1626f5af4415e0e5" alt="California Dental Logo" width="160" height="60">
+          </a>
+        </div>
+        
+        <div class="footer-socials" aria-label="Social media links">
+          <a href="https://g.page/r/CWk7m9_or7PLEAE" target="_blank" class="footer-social-link" aria-label="Google Business Page">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.24 10.285V13.4h6.887c-.58 2.31-2.855 4.04-5.647 4.04-3.415 0-6.182-2.768-6.182-6.182s2.767-6.182 6.182-6.182c1.47 0 2.81.517 3.86 1.488l2.454-2.455C18.23 2.76 15.38 1.8 12.24 1.8 6.64 1.8 2.1 6.34 2.1 11.94s4.54 10.14 10.14 10.14c5.84 0 9.71-4.11 9.71-9.88 0-.66-.07-1.3-.19-1.915H12.24z"/></svg>
+          </a>
+          <a href="https://www.yelp.com/biz/california-dental-san-fernando" target="_blank" class="footer-social-link" aria-label="Yelp Reviews Page">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.004 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm-1.25 15.5l-3.25-2.25 2.5-4.25 3.25 2.25-2.5 4.25zm4.75-3.5l-3.5-1.75 1.5-4.75 3.5 1.75-1.5 4.75z"/></svg>
+          </a>
+          <a href="http://instagram.com/cali.dental" target="_blank" class="footer-social-link" aria-label="Instagram Profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/California-Dental-102701184715709/" target="_blank" class="footer-social-link" aria-label="Facebook Page">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          Copyright &copy; 2026 MH Sub I, LLC dba Officite. All rights reserved.
+        </div>
+        <div class="footer-links">
+          <!-- PRESERVED: Officite Admin Login & Sitemap links -->
+          <a href="https://secure.officite.com" rel="nofollow" target="_blank">Admin Log In</a>
+          <a href="https://www.california-dental.net/sitemap">Site Map</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       JAVASCRIPT — Navbar scroll, mobile drawer, hero & testimonials slider
        ═══════════════════════════════════════════════════════════════ -->
   <script>
   (function () {
@@ -888,6 +1803,95 @@
       if (e.key === 'ArrowRight') { goTo(current + 1); stopAuto(); startAuto(); }
       if (e.key === 'ArrowLeft')  { goTo(current - 1); stopAuto(); startAuto(); }
     });
+
+    /* ── Testimonials carousel logic ── */
+    var tCards     = document.querySelectorAll('.testimonial-card');
+    var tDots      = document.querySelectorAll('.testimonials__dot');
+    var tAnnounce  = document.getElementById('testimonial-announce');
+    var tPauseBtn  = document.getElementById('t-pause');
+    var tPauseIcon = document.getElementById('t-pause-icon');
+    var tPlayIcon  = document.getElementById('t-play-icon');
+    var tContainer = document.getElementById('testimonials-carousel');
+
+    var tCurrent   = 0;
+    var tPaused    = false;
+    var tInterval  = null;
+    var T_DELAY    = 4000;
+
+    if (reducedMotion) tPaused = true;
+
+    function goTestimonial(idx) {
+      if (!tCards.length) return;
+      tCards[tCurrent].classList.remove('active');
+      tDots[tCurrent].classList.remove('active');
+      tDots[tCurrent].setAttribute('aria-selected', 'false');
+      tDots[tCurrent].setAttribute('tabindex', '-1');
+
+      tCurrent = (idx + tCards.length) % tCards.length;
+
+      tCards[tCurrent].classList.add('active');
+      tDots[tCurrent].classList.add('active');
+      tDots[tCurrent].setAttribute('aria-selected', 'true');
+      tDots[tCurrent].setAttribute('tabindex', '0');
+
+      if (tAnnounce) tAnnounce.textContent = 'Testimonial ' + (tCurrent + 1) + ' of ' + tCards.length;
+    }
+
+    function startTAuto() {
+      if (tPaused || reducedMotion) return;
+      clearInterval(tInterval);
+      tInterval = setInterval(function () { goTestimonial(tCurrent + 1); }, T_DELAY);
+    }
+
+    function stopTAuto() { clearInterval(tInterval); }
+
+    if (tCards.length > 0) {
+      startTAuto();
+    }
+
+    if (document.getElementById('t-prev')) {
+      document.getElementById('t-prev').addEventListener('click', function () {
+        goTestimonial(tCurrent - 1);
+        stopTAuto(); startTAuto();
+      });
+    }
+    if (document.getElementById('t-next')) {
+      document.getElementById('t-next').addEventListener('click', function () {
+        goTestimonial(tCurrent + 1);
+        stopTAuto(); startTAuto();
+      });
+    }
+
+    tDots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        goTestimonial(parseInt(dot.dataset.slide, 10));
+        stopTAuto(); startTAuto();
+      });
+    });
+
+    if (tPauseBtn) {
+      tPauseBtn.addEventListener('click', function () {
+        tPaused = !tPaused;
+        if (tPaused) {
+          stopTAuto();
+          if (tPauseIcon) tPauseIcon.style.display = 'none';
+          if (tPlayIcon)  tPlayIcon.style.display  = '';
+          tPauseBtn.setAttribute('aria-label', 'Resume testimonial slideshow');
+        } else {
+          startTAuto();
+          if (tPauseIcon) tPauseIcon.style.display = '';
+          if (tPlayIcon)  tPlayIcon.style.display  = 'none';
+          tPauseBtn.setAttribute('aria-label', 'Pause testimonial slideshow');
+        }
+      });
+    }
+
+    if (tContainer) {
+      tContainer.addEventListener('mouseenter', stopTAuto);
+      tContainer.addEventListener('mouseleave', startTAuto);
+      tContainer.addEventListener('focusin',    stopTAuto);
+      tContainer.addEventListener('focusout',   startTAuto);
+    }
 
   }());
   </script>
