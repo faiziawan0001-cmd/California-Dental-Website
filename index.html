@@ -124,16 +124,18 @@
       top: 0; left: 0; right: 0;
       z-index: 1000;
       height: var(--nav-h);
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-border);
-      box-shadow: var(--shadow-sm);
-      transition: background var(--transition), box-shadow var(--transition);
+      /* Transparent on load — overlays the hero like Marano */
+      background: transparent;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: background 350ms ease, border-color 350ms ease, box-shadow 350ms ease;
     }
+    /* Sticky state — triggered by JS scroll */
     .navbar.scrolled {
-      background: rgba(255,255,255,0.99);
-      box-shadow: var(--shadow-md);
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
     }
     .navbar__inner {
       max-width: 1280px;
@@ -155,9 +157,15 @@
       height: 52px;
       width: auto;
       object-fit: contain;
+      /* Brightness filter so logo looks good on dark hero */
+      filter: brightness(0) invert(1);
+      transition: filter 350ms ease;
+    }
+    .navbar.scrolled .navbar__logo img {
+      filter: none;
     }
 
-    /* Nav links */
+    /* Nav links — white on transparent, dark on scrolled */
     .navbar__nav {
       flex: 1;
       display: flex;
@@ -169,24 +177,33 @@
       font-family: var(--font-body);
       font-size: 14px;
       font-weight: 500;
-      color: var(--color-foreground);
+      color: rgba(255,255,255,0.88);
       padding: 8px 12px;
       border-radius: 6px;
+      letter-spacing: 0.01em;
       transition: color var(--transition), background var(--transition);
       white-space: nowrap;
     }
     .navbar__nav a:hover,
     .navbar__nav a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+    /* Scrolled link colors */
+    .navbar.scrolled .navbar__nav a {
+      color: var(--color-foreground);
+    }
+    .navbar.scrolled .navbar__nav a:hover,
+    .navbar.scrolled .navbar__nav a.active {
       color: var(--color-primary);
-      background: rgba(14,165,233,.07);
+      background: rgba(14,165,233,0.07);
     }
     .navbar__nav a:focus-visible {
-      outline: 2px solid var(--color-primary);
+      outline: 2px solid rgba(255,255,255,0.8);
       outline-offset: 2px;
     }
-    .navbar__nav a:focus-visible {
+    .navbar.scrolled .navbar__nav a:focus-visible {
       outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
     }
 
     /* Navbar right: phone + CTA */
@@ -203,35 +220,57 @@
       font-family: var(--font-heading);
       font-size: 14px;
       font-weight: 600;
-      color: var(--color-foreground);
+      color: rgba(255,255,255,0.88);
       transition: color var(--transition);
     }
-    .navbar__phone:hover { color: var(--color-primary); }
+    .navbar__phone:hover { color: #fff; }
     .navbar__phone svg { flex-shrink: 0; }
+    .navbar.scrolled .navbar__phone { color: var(--color-foreground); }
+    .navbar.scrolled .navbar__phone:hover { color: var(--color-primary); }
+
+    /* CTA button — glassmorphic pill on transparent, solid on scrolled */
     .navbar__cta {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--color-primary);
+      /* Glassmorphic style matching Marano's "Prenota Visita" button */
+      background: rgba(255,255,255,0.15);
       color: #fff;
       font-family: var(--font-heading);
       font-size: 13px;
       font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.4);
       cursor: pointer;
-      transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
-      box-shadow: 0 2px 8px rgba(14,165,233,.35);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition), color var(--transition);
       white-space: nowrap;
     }
     .navbar__cta:hover {
-      opacity: .92;
+      background: rgba(255,255,255,0.28);
+      border-color: rgba(255,255,255,0.7);
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(14,165,233,.45);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
     }
-    .navbar__cta:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; }
+    /* Scrolled CTA — solid colored */
+    .navbar.scrolled .navbar__cta {
+      background: var(--color-primary);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(14,165,233,0.35);
+      border-radius: 8px;
+    }
+    .navbar.scrolled .navbar__cta:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(14,165,233,0.45);
+    }
+    .navbar__cta:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 3px; }
+    .navbar.scrolled .navbar__cta:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; }
 
-    /* Hamburger (mobile) */
+    /* Hamburger (mobile) — white on transparent navbar */
     .navbar__hamburger {
       display: none;
       flex-direction: column;
@@ -247,14 +286,16 @@
       transition: background var(--transition);
       margin-left: auto;
     }
-    .navbar__hamburger:hover { background: var(--color-muted); }
+    .navbar__hamburger:hover { background: rgba(255,255,255,0.12); }
     .navbar__hamburger span {
       display: block;
       height: 2px;
-      background: var(--color-foreground);
+      background: #fff;
       border-radius: 2px;
-      transition: transform 250ms ease, opacity 250ms ease, width var(--transition);
+      transition: transform 250ms ease, opacity 250ms ease, width var(--transition), background 350ms ease;
     }
+    .navbar.scrolled .navbar__hamburger:hover { background: var(--color-muted); }
+    .navbar.scrolled .navbar__hamburger span { background: var(--color-foreground); }
     .navbar__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .navbar__hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
     .navbar__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -305,11 +346,12 @@
     .hero {
       position: relative;
       width: 100%;
+      /* Fill full viewport — navbar is transparent/overlaid, so no margin-top */
       height: 100vh;
-      min-height: 560px;
-      max-height: 900px;
+      min-height: 620px;
+      max-height: 960px;
       overflow: hidden;
-      margin-top: var(--nav-h);
+      margin-top: 0;
     }
 
     /* Slides */
@@ -324,24 +366,31 @@
       background-position: center;
     }
 
-    /* Overlay — subtle blue scrim + bottom fade */
+    /* Overlay — strong left-side dark scrim + bottom fade (Marano style) */
     .hero__overlay {
       position: absolute;
       inset: 0;
       background:
         linear-gradient(90deg,
-          rgba(12, 50, 80, 0.35) 0%,
-          rgba(12, 50, 80, 0.10) 40%,
-          rgba(12, 50, 80, 0) 68%
+          rgba(8, 20, 35, 0.72) 0%,
+          rgba(8, 20, 35, 0.45) 45%,
+          rgba(8, 20, 35, 0.08) 70%,
+          rgba(8, 20, 35, 0) 100%
         ),
         linear-gradient(to top,
-          rgba(10, 15, 20, 0.50) 0%,
-          rgba(10, 15, 20, 0) 32%
+          rgba(5, 10, 18, 0.60) 0%,
+          rgba(5, 10, 18, 0.10) 28%,
+          rgba(5, 10, 18, 0) 50%
+        ),
+        /* Subtle top-to-bottom scrim so top navbar area is also readable */
+        linear-gradient(to bottom,
+          rgba(0, 0, 0, 0.30) 0%,
+          rgba(0, 0, 0, 0) 20%
         );
       z-index: 1;
     }
 
-    /* Content */
+    /* Content — padding-top offsets the transparent navbar height */
     .hero__content {
       position: relative;
       z-index: 2;
@@ -349,7 +398,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: var(--space-3xl) var(--space-xl);
+      padding: calc(var(--nav-h) + var(--space-3xl)) var(--space-xl) var(--space-3xl);
       max-width: 1280px;
       margin: 0 auto;
     }
@@ -377,19 +426,19 @@
     }
     .hero__eyebrow svg { flex-shrink: 0; }
 
-    /* Heading */
+    /* Heading — all white, clean serif-weight like Marano */
     .hero__heading {
       font-family: var(--font-heading);
       font-weight: 700;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      line-height: 1.15;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      line-height: 1.12;
       color: #fff;
       margin-bottom: var(--space-lg);
-      text-shadow: 0 2px 12px rgba(0,0,0,.25);
+      text-shadow: 0 2px 20px rgba(0,0,0,.30);
     }
     .hero__heading em {
       font-style: normal;
-      color: rgba(255,255,255,.98);
+      color: #fff;
     }
 
     /* Caption / subtitle */
@@ -410,51 +459,56 @@
       gap: var(--space-md);
       margin-bottom: var(--space-2xl);
     }
+    /* Primary — warm gold like Marano's "Prenota una Visita" */
     .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--color-primary);
+      background: #c5a26a;
       color: #fff;
       font-family: var(--font-heading);
       font-size: 15px;
       font-weight: 600;
-      padding: 14px 28px;
+      padding: 15px 32px;
       border-radius: 8px;
       cursor: pointer;
       border: none;
-      box-shadow: 0 4px 16px rgba(14,165,233,.45);
-      transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(197,162,106,.40);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
       white-space: nowrap;
+      letter-spacing: 0.01em;
     }
     .btn-primary:hover {
-      opacity: .92;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 24px rgba(14,165,233,.55);
+      background: #b8925a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(197,162,106,.55);
     }
     .btn-primary:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
+    /* Ghost — full glassmorphic like Marano's "Scopri il Metodo Piuma" */
     .btn-ghost {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: transparent;
+      background: rgba(255,255,255,0.10);
       color: #fff;
       font-family: var(--font-heading);
       font-size: 15px;
       font-weight: 600;
-      padding: 14px 28px;
+      padding: 15px 32px;
       border-radius: 8px;
-      border: 2px solid rgba(255,255,255,.6);
+      border: 1.5px solid rgba(255,255,255,0.45);
       cursor: pointer;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       transition: background var(--transition), border-color var(--transition), transform var(--transition);
       white-space: nowrap;
+      letter-spacing: 0.01em;
     }
     .btn-ghost:hover {
-      background: rgba(255,255,255,.12);
-      border-color: #fff;
-      transform: translateY(-1px);
+      background: rgba(255,255,255,0.20);
+      border-color: rgba(255,255,255,0.80);
+      transform: translateY(-2px);
     }
     .btn-ghost:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
@@ -1008,10 +1062,11 @@
       .cta-container { flex-direction: column; text-align: center; }
     }
     @media (max-width: 768px) {
-      .hero { height: calc(100svh - var(--nav-h)); min-height: 480px; max-height: 700px; }
+      /* Hero now fills full 100svh since navbar is transparent/overlaid */
+      .hero { height: 100svh; min-height: 520px; max-height: 820px; }
       .hero__content { padding: var(--space-xl) var(--space-md); justify-content: flex-end; padding-bottom: 80px; }
       .hero__inner { max-width: 100%; }
-      .hero__heading { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      .hero__heading { font-size: clamp(2rem, 7vw, 2.8rem); }
       .hero__caption { font-size: .95rem; }
       .navbar__inner { padding: 0 var(--space-md); }
       .problem-container { flex-direction: column; gap: var(--space-xl); }
@@ -1121,7 +1176,7 @@
     <!-- Background image -->
     <div class="hero__slides" aria-hidden="true">
       <div class="hero__slide active"
-           style="background-image:url('assets/heri.jfif')">
+           style="background-image:url('assets/office 2.jfif')">
       </div>
     </div>
 
@@ -1589,11 +1644,13 @@
   (function () {
     'use strict';
 
-    /* ── Navbar scroll shadow ── */
+    /* ── Navbar scroll — transparent on hero, solid after scroll ── */
     var navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', function () {
-      navbar.classList.toggle('scrolled', window.scrollY > 10);
-    }, { passive: true });
+    function handleNavbarScroll() {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }
+    window.addEventListener('scroll', handleNavbarScroll, { passive: true });
+    handleNavbarScroll(); // run once on load in case page is pre-scrolled
 
     /* ── Mobile hamburger ── */
     var hamburgerBtn = document.getElementById('hamburger-btn');
