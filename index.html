@@ -322,14 +322,6 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      opacity: 0;
-      transition: opacity 800ms ease;
-      will-change: opacity;
-    }
-    .hero__slide.active { opacity: 1; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero__slide { transition: none; }
     }
 
     /* Overlay — subtle blue scrim + bottom fade */
@@ -488,61 +480,7 @@
     }
     .hero__badge svg { flex-shrink: 0; }
 
-    /* Slide controls (prev / next / dots / pause) */
-    .hero__controls {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-    }
-    .hero__ctrl-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,.5);
-      background: rgba(255,255,255,.12);
-      backdrop-filter: blur(6px);
-      color: #fff;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition), border-color var(--transition), transform var(--transition);
-    }
-    .hero__ctrl-btn:hover {
-      background: rgba(255,255,255,.25);
-      border-color: rgba(255,255,255,.9);
-      transform: scale(1.05);
-    }
-    .hero__ctrl-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-
-    .hero__dots {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .hero__dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.4);
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition), width var(--transition);
-    }
-    .hero__dot.active {
-      background: #fff;
-      width: 24px;
-      border-radius: 100px;
-    }
-    .hero__dot:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-
-    /* Slide-number announce (sr-only) */
+    /* Screen-reader only (sr-only) */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -1075,7 +1013,6 @@
       .hero__inner { max-width: 100%; }
       .hero__heading { font-size: clamp(1.8rem, 6vw, 2.4rem); }
       .hero__caption { font-size: .95rem; }
-      .hero__controls { bottom: 20px; }
       .navbar__inner { padding: 0 var(--space-md); }
       .problem-container { flex-direction: column; gap: var(--space-xl); }
       .section { padding: var(--space-2xl) var(--space-md); }
@@ -1179,21 +1116,12 @@
   <!-- ═══════════════════════════════════════════════════════════════
        HERO SECTION
        ═══════════════════════════════════════════════════════════════ -->
-  <section class="hero" id="hero" aria-label="Homepage hero slideshow">
+  <section class="hero" id="hero" aria-label="California Dental homepage hero">
 
-    <!-- Background slides (CDN images preserved from original) -->
+    <!-- Background image -->
     <div class="hero__slides" aria-hidden="true">
       <div class="hero__slide active"
-           style="background-image:url('https://cdcssl.ibsrv.net/ibimg/smb/3000x2000_80/webmgr/0v/0/l/Banner1-min.jpg.webp?b0aba526b880444fe1b31b6194212b46')">
-      </div>
-      <div class="hero__slide"
-           style="background-image:url('https://cdcssl.ibsrv.net/ibimg/smb/3000x2000_80/webmgr/0v/0/l/Banner2-min.jpg.webp?bb42b1488b19e191a521c3a68cb92cef')">
-      </div>
-      <div class="hero__slide"
-           style="background-image:url('https://cdcssl.ibsrv.net/ibimg/smb/3000x1984_80/webmgr/0v/0/l/Banner3-min.jpg.webp?cf7e42110e94c0af7acf92ee405239bb')">
-      </div>
-      <div class="hero__slide"
-           style="background-image:url('https://cdcssl.ibsrv.net/ibimg/smb/3000x2000_80/webmgr/0v/0/l/Banner4-min.jpg.webp?14c86e592265cdf810d7b770c278e4c6')">
+           style="background-image:url('assets/heri.jfif')">
       </div>
     </div>
 
@@ -1210,13 +1138,13 @@
           Family &amp; Cosmetic Dentistry · San Fernando, CA
         </span>
 
-        <!-- Heading (updated per active slide via JS) -->
-        <h1 class="hero__heading" id="hero-heading" aria-live="polite">
+        <!-- Heading -->
+        <h1 class="hero__heading" id="hero-heading">
           Healthy Mouth,<br><em>Happy Life.</em>
         </h1>
 
         <!-- Caption -->
-        <p class="hero__caption" id="hero-caption" aria-live="polite">
+        <p class="hero__caption">
           Perfecting San Fernando's smiles. Trusted family &amp; cosmetic dentistry in the heart of town.
         </p>
 
@@ -1249,35 +1177,6 @@
         </div>
 
       </div>
-    </div>
-
-    <!-- Slide controls -->
-    <div class="hero__controls" role="group" aria-label="Slideshow controls">
-      <span class="sr-only" id="slide-announce" aria-live="polite" aria-atomic="true"></span>
-
-      <button class="hero__ctrl-btn" id="hero-prev" aria-label="Previous slide" title="Previous slide">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-
-      <div class="hero__dots" role="tablist" aria-label="Slide navigation">
-        <button class="hero__dot active" role="tab" aria-selected="true"  aria-label="Slide 1" data-slide="0" tabindex="0"></button>
-        <button class="hero__dot"        role="tab" aria-selected="false" aria-label="Slide 2" data-slide="1" tabindex="-1"></button>
-        <button class="hero__dot"        role="tab" aria-selected="false" aria-label="Slide 3" data-slide="2" tabindex="-1"></button>
-        <button class="hero__dot"        role="tab" aria-selected="false" aria-label="Slide 4" data-slide="3" tabindex="-1"></button>
-      </div>
-
-      <button class="hero__ctrl-btn" id="hero-next" aria-label="Next slide" title="Next slide">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-
-      <button class="hero__ctrl-btn" id="hero-pause" aria-label="Pause slideshow" title="Pause slideshow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" id="pause-icon">
-          <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
-        </svg>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" id="play-icon" style="display:none">
-          <polygon points="5 3 19 12 5 21 5 3"/>
-        </svg>
-      </button>
     </div>
 
   </section>
@@ -1684,7 +1583,7 @@
   </footer>
 
   <!-- ═══════════════════════════════════════════════════════════════
-       JAVASCRIPT — Navbar scroll, mobile drawer, hero & testimonials slider
+       JAVASCRIPT — Navbar scroll, mobile drawer & testimonials slider
        ═══════════════════════════════════════════════════════════════ -->
   <script>
   (function () {
@@ -1703,105 +1602,6 @@
       var open = drawer.classList.toggle('open');
       hamburgerBtn.classList.toggle('open', open);
       hamburgerBtn.setAttribute('aria-expanded', String(open));
-    });
-
-    /* ── Hero slider ── */
-    var slides    = document.querySelectorAll('.hero__slide');
-    var dots      = document.querySelectorAll('.hero__dot');
-    var heading   = document.getElementById('hero-heading');
-    var announce  = document.getElementById('slide-announce');
-    var pauseBtn  = document.getElementById('hero-pause');
-    var pauseIcon = document.getElementById('pause-icon');
-    var playIcon  = document.getElementById('play-icon');
-    var hero      = document.getElementById('hero');
-
-    var slideData = [
-      { title: 'Healthy Mouth,\u003cbr\u003e\u003cem\u003eHappy Life.\u003c/em\u003e' },
-      { title: 'Changing Lives,\u003cbr\u003e\u003cem\u003eOne Smile at a Time.\u003c/em\u003e' },
-      { title: 'Discover Your Smile\u003cbr\u003e\u003cem\u003eToday.\u003c/em\u003e' },
-      { title: 'Care for Your Smile,\u003cbr\u003e\u003cem\u003eLet it Brighten Your Day.\u003c/em\u003e' }
-    ];
-
-    var current    = 0;
-    var paused     = false;
-    var interval   = null;
-    var DELAY      = 4000;
-
-    /* Respect reduced-motion preference */
-    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion) paused = true;
-
-    function goTo(idx) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      dots[current].setAttribute('aria-selected', 'false');
-      dots[current].setAttribute('tabindex', '-1');
-
-      current = (idx + slides.length) % slides.length;
-
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
-      dots[current].setAttribute('aria-selected', 'true');
-      dots[current].setAttribute('tabindex', '0');
-
-      heading.innerHTML = slideData[current].title;
-      announce.textContent = 'Slide ' + (current + 1) + ' of ' + slides.length;
-    }
-
-    function startAuto() {
-      if (paused || reducedMotion) return;
-      clearInterval(interval);
-      interval = setInterval(function () { goTo(current + 1); }, DELAY);
-    }
-
-    function stopAuto() { clearInterval(interval); }
-
-    startAuto();
-
-    /* Prev / Next */
-    document.getElementById('hero-prev').addEventListener('click', function () {
-      goTo(current - 1);
-      stopAuto(); startAuto();
-    });
-    document.getElementById('hero-next').addEventListener('click', function () {
-      goTo(current + 1);
-      stopAuto(); startAuto();
-    });
-
-    /* Dots */
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () {
-        goTo(parseInt(dot.dataset.slide, 10));
-        stopAuto(); startAuto();
-      });
-    });
-
-    /* Pause / Resume */
-    pauseBtn.addEventListener('click', function () {
-      paused = !paused;
-      if (paused) {
-        stopAuto();
-        pauseIcon.style.display = 'none';
-        playIcon.style.display  = '';
-        pauseBtn.setAttribute('aria-label', 'Resume slideshow');
-      } else {
-        startAuto();
-        pauseIcon.style.display = '';
-        playIcon.style.display  = 'none';
-        pauseBtn.setAttribute('aria-label', 'Pause slideshow');
-      }
-    });
-
-    /* Pause on hover / focus */
-    hero.addEventListener('mouseenter', stopAuto);
-    hero.addEventListener('mouseleave', startAuto);
-    hero.addEventListener('focusin',    stopAuto);
-    hero.addEventListener('focusout',   startAuto);
-
-    /* Keyboard: left/right arrow on dots */
-    document.querySelector('.hero__dots').addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { goTo(current + 1); stopAuto(); startAuto(); }
-      if (e.key === 'ArrowLeft')  { goTo(current - 1); stopAuto(); startAuto(); }
     });
 
     /* ── Testimonials carousel logic ── */
