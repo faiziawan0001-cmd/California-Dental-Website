@@ -1,0 +1,11 @@
+# Internal working files (NOT deployed to the public website)
+design-system/
+hero-overlay-strategies-preview.html
+client-brief.md
+project-rules.md
+handoff-email-client.txt
+production-handover/
+production-handover.zip
+
+# Vercel
+.vercel/
