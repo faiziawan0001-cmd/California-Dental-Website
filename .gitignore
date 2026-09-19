@@ -9,3 +9,5 @@ production-handover.zip
 
 # Vercel
 .vercel/
+.vercel
+.env*

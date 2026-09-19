@@ -1,0 +1,22 @@
+/* ==========================================
+   California Dental - Copy deterrent styles
+   Deters casual copying/right-click saving.
+   (Note: cannot fully prevent copying.)
+   ========================================== */
+
+/* Deter text selection */
+html, body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Deter image dragging */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
