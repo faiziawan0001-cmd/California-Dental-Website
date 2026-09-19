@@ -6,11 +6,6 @@
 (function () {
   "use strict";
 
-  /* Block the right-click context menu */
-  document.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-  });
-
   /* Mark images as non-draggable and block drag/drop */
   var setDraggable = function () {
     var imgs = document.querySelectorAll("img");
